@@ -1,3 +1,31 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["import", "unused-imports"],
+  "rules": {
+    "@typescript-eslint/no-empty-object-type": "off",
+    // Remove unused imports
+    "unused-imports/no-unused-imports": "warn",
+    // Remove unused variables but ignore rest siblings (e.g., `{...rest}`)
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    // Ensure consistent ordering of imports
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"]],
+        "newlines-between": "always"
+      }
+    ]
+  }
 }
